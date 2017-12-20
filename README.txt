@@ -12,5 +12,5 @@ To use the script, run main.py.
 		* location  	--> directory that contains the image to be preprocessed
 		* file_type 	--> file type of the image. Can be .tif, .jpg, .ppm, .png
 		* desired_size 	--> output size desired
-		* minRadius		--> minimum radius of the circle. Adjust depending on the size of the image
-		* maxRadius		--> maximum radius of the circle. Adjust depending on the size of the image
+		* minRadius	--> minimum radius of the circle. Adjust depending on the size of the image
+		* maxRadius	--> maximum radius of the circle. Adjust depending on the size of the image
