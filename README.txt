@@ -14,3 +14,7 @@ To use the script, run main.py.
 		* desired_size 	--> output size desired
 		* minRadius	--> minimum radius of the circle. Adjust depending on the size of the image
 		* maxRadius	--> maximum radius of the circle. Adjust depending on the size of the image
+
+Output file of the image is JPEG
+Images are saved to a separate folder: output_images
+CSV files for the rgb values are saved to a separate folder: output_files
