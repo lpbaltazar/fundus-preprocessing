@@ -8,17 +8,20 @@ import csv
 import shutil
 import os
 
+location = 'C:\main\IMAGES'
+file_type = '.jpg'
 desired_size = (512, 512)
 #adjust depending on the size of the image
 minRadius = 1000
 maxRadius = 2000
 i = 0
 
-for img in glob.glob('C:\Users\User\Desktop\\fundus-preprocessing\IMAGES\*.jpg'):
+for img in glob.glob(location+'\*'+file_type):
 	croppingWithPad.addPad(img)
 	n = adjustment.openImage(img+"_pad"+".jpg")
 	rotated_img = image_rotation.rotate_image(n)
-	bright_img = adjustment.brightnessAdjustment(rotated_img)
+	flipped_img = image_rotation.flipImage(rotated_img)
+	bright_img = adjustment.brightnessAdjustment(flipped_img)
 	contrast_img = adjustment.contrastAdjustment(bright_img)
 	crop_img = croppingWithPad.cropImage(contrast_img, minRadius, maxRadius)
 	resize_img = croppingWithPad.resizeImage(crop_img, desired_size)
