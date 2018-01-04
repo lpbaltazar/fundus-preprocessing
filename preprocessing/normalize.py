@@ -34,7 +34,7 @@ def normalize_image(img_obj):
 #This functions creates 3  csv files containing pixel values for each RGB channels
 def write_to_file(r, g, b, i):
 	channels = {'rchannel': r, 'gchannel': g, 'bchannel': b}
-	for filename, value in channels.iteritems():
+	for filename, value in channels.items():
 		img_filename = (filename + '{:>05}' + '.csv').format(i)
 		np.savetxt(img_filename, value, delimiter=',')
 		print('Print Done!')

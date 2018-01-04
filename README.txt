@@ -19,7 +19,11 @@ Output file of the image is JPEG
 
 Change the directory of the output folders in the files:
 	*move_images.py
-	*move_fiels.py
+	*move_files.py
+
+!! Need to create the following folder to the fundus-preprocessing directory:
+	* output_files
+	* output_images
 	
 Images are saved to a separate folder: output_images
 CSV files for the rgb values are saved to a separate folder: output_files
