@@ -7,7 +7,7 @@ angle_range = 360
 def rotate_image(img_obj):
 	rows, cols, ch = img_obj.shape
 	angle_rotation = np.random.uniform(angle_range)-angle_range/2
-	dst = imutils.rotate_bound(image, angle_rotation)
+	dst = imutils.rotate_bound(img_obj, angle_rotation)
 	return dst
 
 def flipImage(img):
