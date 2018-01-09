@@ -27,3 +27,8 @@ Change the directory of the output folders in the files:
 	
 Images are saved to a separate folder: output_images
 CSV files for the rgb values are saved to a separate folder: output_files
+
+FILE: preprocess_crop.py
+Crops the images and resize it 512 x 512.
+Change the variables location and target_dir according to your machine.
+Also returns if it cant find circle in image.
