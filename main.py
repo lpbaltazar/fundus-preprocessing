@@ -8,7 +8,6 @@ import glob
 import csv
 import shutil
 import os
-import imutils
 
 location = '/Users/joverlyngaudillo/Documents/workspace/fundus-preprocessing/IMAGES'
 file_type = '.jpg'
