@@ -1,3 +1,9 @@
+Requirements:
+	OpenCV
+	Python 3.6
+	Imutils
+	Numpy
+	
 This is a python script for the preprocessing of the fundus images.
 It includes the following operations:
 	* Rotation
