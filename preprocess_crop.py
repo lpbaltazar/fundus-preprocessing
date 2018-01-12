@@ -4,10 +4,10 @@ import numpy as np
 import csv
 from preprocessing import croppingwithpad
 
-ROOT_PATH = "/Users/lpbaltazar/workspace/fundus-preprocessing/"
-train_data_directory = os.path.join(ROOT_PATH, "train_002")
-target_dir = '/Users/lpbaltazar/workspace/fundus-preprocessing/output_images/with_circles/'
-target_dir2 = '/Users/lpbaltazar/workspace/fundus-preprocessing/output_images/no_circles/'
+ROOT_PATH = "/Users/joverlyngaudillo/Documents/cloned-repository/fundus-preprocessing/"
+train_data_directory = os.path.join(ROOT_PATH, "IMAGES")
+target_dir = '/Users/joverlyngaudillo/Documents/cloned-repository/fundus-preprocessing/output_images/with_circles/'
+target_dir2 = '/Users/joverlyngaudillo/Documents/cloned-repository/fundus-preprocessing/output_images/no_circles/'
 no_circles = []
 
 def loadData(data_directory):
