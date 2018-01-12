@@ -6,7 +6,7 @@ import os
 import cv2
 import numpy as np
 
-location = '/Users/lpbaltazar/workspace/kaggle-data/train'
+location = '/Users/lpbaltazar/workspace/kaggle-data/train_002'
 file_type = '.jpeg'
 target_dir = '/Users/lpbaltazar/workspace/fundus-preprocessing/output_images/'
 i=0
@@ -21,4 +21,4 @@ for n in glob.glob(location+'/*'+file_type):
 		cv2.imwrite(target_dir + 'image{:>05}.jpg'.format(i), res)
 		i = i+1
 
-np.savetxt('no_circles.txt', no_circles, delimeter = ",", fmt = "%s" )
+np.savetxt('no_circles.txt', no_circles, delimiter = ",", fmt = "%s" )
