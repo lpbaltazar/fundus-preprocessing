@@ -2,12 +2,22 @@ import cv2
 import numpy as np
 from PIL import Image, ImageOps
 
-#function that opens the image
 def openImage(file):
+	'''
+	This function reads the image.
+	'''
 	return cv2.imread(file)
 
 #function that looks for circles in the image. used for cropping the image
 def findCircles(img, size, n):
+	'''
+	This function looks for circles in the fundus images to be used for cropping of the images. It returns center_x, center_y, radius and message
+	type_c is the type of the circle
+		0 - Circle diameter is almost same with the image height
+		1 - Circle diameter is bigger than the image height
+		2 - Circle diameter is smaller than the image height 
+	mes returns a message wether a circle is found or not (0 - circle found, 1 - circle not found)
+	'''
 	h, w = img.shape[:2]
 	size = 512
 	helper = h / size
@@ -51,8 +61,12 @@ def findCircles(img, size, n):
 
 		return c_x, c_y, r, type_c, mes
 
-#function that crops the images
 def cropImage(img, n):
+	'''
+	Crops the images by locating the center from the function find circles and crop the images according to the center and radius.
+	If mes = 1 it returns the original image and the message
+	If mes = 0 it crops the images and return the original image
+	'''
 	center_x, center_y, r, type_c, mes = findCircles(img, 512, n)
 	if mes == 1:
 		return img, mes
@@ -73,6 +87,9 @@ def cropImage(img, n):
 	return crop_img, mes
 
 def padToSquare(img):
+	'''
+	This function pads the image into a square.
+	'''
 	w, l = img.shape[:2]
 	if (w<l):
 		border = int((l-w)/2.0)
@@ -83,8 +100,25 @@ def padToSquare(img):
 
 	return pad_img
 
-#function that resizes the images
-def resizeImage(crop_img, desired_size):
-	res_img = cv2.resize(crop_img, (desired_size[0], desired_size[0]))
-	return res_img
+def cropImageSameHeight(img, f):
+	'''
+	This function is used when the function findCircles failed to find any circles from the fundus images.
+	It crops the images by using the height/2 as its radius
+	'''
+	h, w = img.shape[:2]
+	border = abs(int(w / 2.0) - h / 2)
+	img = cv2.copyMakeBorder(img, top = int(border), bottom = int(border), left = 0, right = 0, borderType = cv2.BORDER_CONSTANT, value = [0, 0, 0])
+	h, w = img.shape[:2]
+	center_x = int(w / 2)
+	center_y = int(h / 2)
+	r = int(w / 2)
+
+	y = (center_y - r)
+	if y <= 0:
+		y = 0
+	x = (center_x - r)
+	h = int(y + (r * 2))
+	w = int(x + (r * 2))
+	crop_img = img[y: h, x : w]
+	return crop_img
 
