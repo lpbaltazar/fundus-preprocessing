@@ -1,19 +1,26 @@
-from brightness_contrast import adjustment
-from preprocessing import croppingwithpad
-import glob
-import shutil
 import os
+import skimage.data
+import skimage.io
+import numpy as np
 import cv2
 
-location = '/Users/lpbaltazar/workspace/kaggle-data/train'
-file_type = '.jpeg'
-target_dir = '/Users/lpbaltazar/workspace/fundus-preprocessing/output_images/'
-i=0
-for n in glob.glob(location+'/*'+file_type):
-	img = adjustment.openImage(n)
-	crop, mes = croppingwithpad.cropImage(img, n)
-	#rot = rotate_image(crop, angle)
-	if mes == 0:
-		res = cv2.resize(crop, (512, 512))
-		cv2.imwrite(target_dir + 'image{:>05}.jpg'.format(i), res)
-		i = i+1
+from preprocessing import croppingwithpad
+
+ROOT_PATH = "/Users/joverlyngaudillo/Desktop/local-codes/preprocess/"
+train_data_directory = os.path.join(ROOT_PATH, "TRAINDATA")
+target_dir = '/Users/joverlyngaudillo/Desktop/local-codes/INPUT_IMAGES/'
+
+def loadData(data_directory):
+    for f in os.listdir(data_directory):
+        file_names = os.path.join(data_directory, f)
+        img = cv2.imread(file_names)
+
+        crop, mes = croppingwithpad.cropImage(img, n)
+
+        if mes == 0:
+            res = cv2.resize(crop, (512, 512))
+            cv2.imwrite(target_dir + f , res)
+
+loadData(train_data_directory)
+            
+   
