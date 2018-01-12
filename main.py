@@ -19,18 +19,26 @@ desired_size = (512, 512)
 
 def loadData(data_directory):
     for f in os.listdir(data_directory):
-        file_names = os.path.join(data_directory, f)
-        img = cv2.imread(file_names)
+		file_names = os.path.join(data_directory, f)
+		if file_names.endswith('.jpeg'):
+			img = cv2.imread(file_names)
+			crop, mes = croppingwithpad.cropImage(img, f)
+			if mes == 1:
+				no_circles.append(f)
+				crop_no_circles = croppingwithpad.cropImageSameHeight(img, f)
+				res = cv2.resize(crop_no_circles, (512, 512))
+				#cv2.imwrite(target_dir2 + f, res)
+			if mes == 0:
+				res = cv2.resize(crop, (512, 512))
+				#cv2.imwrite(target_dir + f , res)
+			rot = rotation.image_rotation(res)
+			flip = rotation.flipImage(rot)
+			bright = adjustment.brightnessAdjustment(flip)
+			contrast = adjustment.contrastAdjustment(bright)
+			cv2.imwrite(target_dir + f, contrast)
 
-        rotated_img = image_rotation.rotate_image(n)
-		flipped_img = image_rotation.flipImage(rotated_img)
-		bright_img = adjustment.brightnessAdjustment(flipped_img)
-		contrast_img = adjustment.contrastAdjustment(bright_img)
-		crop_img, mes = croppingwithpad.cropImage(contrast_img, n)
-		if mes == 0:
-			res = cv2.resize(crop_img, (512, 512))
-			cv2.imwrite(target_dir + f + '.jpg', res)
-			i = i+1
+	np.savetxt('no_circles.txt', no_circles, delimiter = ",", fmt = "%s" )     
 
+loadData(train_data_directory)
 move_files.moveCSVFiles()
 print("Done!")
